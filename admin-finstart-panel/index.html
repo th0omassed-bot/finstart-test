@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Тестовая админка FinStart</title>
+  <link rel="stylesheet" href="assets/admin.css" />
+</head>
+<body>
+  <header class="admin-header">
+    <div class="admin-container admin-header-inner">
+      <div>
+        <h1>FinStart Admin</h1>
+        <p>Тестовая админка для GitHub Pages. Изменения сохраняются в этом браузере.</p>
+      </div>
+      <div class="admin-actions">
+        <a class="button secondary" href="../index.html">Открыть сайт</a>
+        <button type="button" id="resetData">Сбросить</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <form id="staticAdminForm">
+      <div class="admin-container admin-grid">
+        <div class="alert success" id="savedAlert" hidden>Изменения сохранены. Откройте сайт или обновите страницу.</div>
+
+        <section class="admin-card">
+          <h2>Главный экран</h2>
+          <label>Бейдж <input name="hero.badge" /></label>
+          <label>Главный заголовок <textarea name="hero.title"></textarea></label>
+          <label>Слоган <input name="hero.slogan" /></label>
+          <label>Описание <textarea name="hero.text"></textarea></label>
+          <label>Текст главной кнопки <input name="hero.primary_button" /></label>
+        </section>
+
+        <section class="admin-card">
+          <h2>Контакты</h2>
+          <div class="two-cols">
+            <label>Телефон для отображения <input name="contact.phone_display" /></label>
+            <label>Телефон для ссылки tel: <input name="contact.phone_tel" /></label>
+          </div>
+          <label>WhatsApp-ссылка <input name="contact.whatsapp_url" /></label>
+          <div class="two-cols">
+            <label>Адрес строка 1 <input name="contact.address_line_1" /></label>
+            <label>Адрес строка 2 <input name="contact.address_line_2" /></label>
+            <label>Адрес строка 3 <input name="contact.address_line_3" /></label>
+            <label>Адрес строка 4 <input name="contact.address_line_4" /></label>
+          </div>
+        </section>
+
+        <section class="admin-card">
+          <h2>Услуги</h2>
+          <p class="help-text">Можно поменять первые восемь карточек услуг на главной.</p>
+          <div id="servicesEditor"></div>
+        </section>
+
+        <section class="admin-card">
+          <h2>Стоимость</h2>
+          <div id="pricingEditor"></div>
+        </section>
+
+        <section class="admin-card">
+          <h2>Рассрочка</h2>
+          <label>Заголовок <input name="installment.title" /></label>
+          <label>Основной текст <textarea name="installment.text"></textarea></label>
+          <label>Пояснение <textarea name="installment.note"></textarea></label>
+        </section>
+      </div>
+
+      <div class="save-bar">
+        <div class="admin-container">
+          <button type="submit">Сохранить изменения</button>
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <script src="assets/static-admin.js"></script>
+</body>
+</html>

@@ -1,14 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("content.php", { cache: "no-store" })
-    .then((response) => {
-      if (!response.ok) throw new Error("Content unavailable");
-      return response.json();
+  loadCmsData()
+    .then((data) => {
+      if (data) applyCmsData(data);
     })
-    .then((data) => applyCmsData(data))
     .catch(() => {
-      // Static fallback remains visible if PHP/content is unavailable.
+      // Static fallback remains visible if dynamic content is unavailable.
     });
 });
+
+function getStoredCmsData() {
+  try {
+    const stored = localStorage.getItem("finstart_site_data");
+    return stored ? JSON.parse(stored) : null;
+  } catch {
+    return null;
+  }
+}
+
+function fetchJson(url) {
+  return fetch(url, { cache: "no-store" }).then((response) => {
+    if (!response.ok) throw new Error("Content unavailable");
+    return response.json();
+  });
+}
+
+function loadCmsData() {
+  const stored = getStoredCmsData();
+  if (stored) return Promise.resolve(stored);
+
+  return fetchJson("content.php").catch(() => fetchJson("data/site.json"));
+}
 
 function setText(selector, value) {
   if (value === undefined || value === null) return;

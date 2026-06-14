@@ -72,3 +72,29 @@ if ("IntersectionObserver" in window && revealElements.length > 0) {
 } else {
   revealElements.forEach((element) => element.classList.add("is-visible"));
 }
+
+const isStaticHost = location.hostname.endsWith("github.io");
+
+if (isStaticHost) {
+  document.querySelectorAll('form[action="send.php"]').forEach((form) => {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const lead = {
+        date: new Date().toISOString(),
+        fields: Object.fromEntries(formData.entries())
+      };
+
+      try {
+        const leads = JSON.parse(localStorage.getItem("finstart_static_leads") || "[]");
+        leads.push(lead);
+        localStorage.setItem("finstart_static_leads", JSON.stringify(leads));
+      } catch {
+        // The visual success path still works if browser storage is unavailable.
+      }
+
+      window.location.href = "thank-you.html";
+    });
+  });
+}
