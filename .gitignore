@@ -1,0 +1,7 @@
+README.txt
+README_LOCAL_ONLY.txt
+admin-finstart-panel/config.php
+data/backups/
+*.log
+.DS_Store
+Thumbs.db
